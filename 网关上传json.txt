@@ -1,0 +1,57 @@
+
+
+网关上传数据json格式:
+说明：1、网关码为唯一码，业务标识可以每次实施时定义。
+	 2、传感器列表中的唯一码为网关唯一码+顺序位置，有多个可以顺序增加数量值。
+	 3、每个传感器的data内容包括9项数据，没有可以为空。比如空气的温湿度传感器的data数据中只有"air_temperature"和"air_humidity"有值，其他没值可以为空。 
+
+
+{
+  "timestamp": 1784012495345, // 整包上报时间：网关打包/上传这一批数据的时间，时间戳，毫秒  必填
+  "gateway": { // 网关信息块
+    "gateway_id": "GW-2026-0001",          // 网关业务标识（可自定义编号 必填）
+    "unique_code": "GW-8F3A9C2B",          // 网关唯一码（GW-设备出厂sn，全局唯一 必填）
+    "sensor_count": 2,                     // 传感器数量：连接到本网关的传感器总数
+    "location": { // 网关安装位置（经纬度）
+      "longitude": 116.397428,             // 经度（WGS84，十进制）
+      "latitude": 39.90923                 // 纬度（WGS84，十进制）
+    }
+  },
+  "sensors": [ // 传感器列表，每个元素代表一个探头的一条上报
+    {
+      "sensor_id": "S-TH-0001",            // 传感器业务标识
+      "unique_code": "GW-8F3A9C2B-0001",   // 传感器唯一码（网关唯一码+顺序位置（如：0001） 必填）
+      "type": "temperature_humidity_npk",      // 类型枚举：温湿度
+      "type_name": "温湿度氮磷钾传感器",          // 类型中文名（可读）
+      "data": {                            // 读数块
+        "soil_temperature": 25.6,               // 土壤温度（℃，摄氏度）
+        "soil_humidity": 68.2                   // 土壤湿度（%RH，相对湿度）
+		"nitrogen": 45.3,                  // 氮含量（mg/kg 或 ppm，按标定单位）
+        "phosphorus": 22.1,                // 磷含量
+        "potassium": 33.7 ,                 // 钾含量
+		"ph": 6.8,                         // pH 值（酸碱度，0–14，无量纲）
+        "salinity": 1.2,             		// 盐分值（EC 电导率 dS/m 或 g/kg，按标定单位）
+  		"air_temperature"：30,                // 空气温度（℃，摄氏度）
+        "air_humidity": 65                   // 空气湿度（%RH，相对湿度）
+	  
+	  }
+    },
+    {
+      "sensor_id": "S-NPK-0001",           // 传感器业务标识
+      "unique_code": "GW-8F3A9C2B-0002",  // 传感器唯一码（网关唯一码+顺序位置（如：0002） 必填）
+      "type": "npk",                       // 类型枚举：氮磷钾
+      "type_name": "氮磷钾传感器",          // 类型中文名
+      "data": {                           // 读数块
+        "soil_temperature": ,               // 土壤温度（℃，摄氏度）
+        "soil_humidity": ,                   // 土壤湿度（%RH，相对湿度）
+		"nitrogen": 45.3,                  // 氮含量（mg/kg 或 ppm，按标定单位）
+        "phosphorus": 22.1,                // 磷含量
+        "potassium": 33.7,                  // 钾含量
+		"ph": ,                         // pH 值（酸碱度，0–14，无量纲）
+        "salinity":,              		// 盐分值（EC 电导率 dS/m 或 g/kg，按标定单位）
+  		"air_temperature"：,                // 空气温度（℃，摄氏度）
+        "air_humidity": ,                   // 空气湿度（%RH，相对湿度）
+      }
+    }
+  ]
+}

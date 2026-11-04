@@ -1,0 +1,48 @@
+{
+  "timestamp": 1578031954000,
+  "gateway": {
+    "gateway_id": "GW-2026-0001",
+    "unique_code": "GW-8F3A9C2B",
+    "sensor_count": 2,
+    "location": {
+      "longitude": 116.397428,
+      "latitude": 39.90923
+    }
+  },
+  "sensors": [
+    {
+      "sensor_id": "S-TH-0001",
+      "unique_code": "GW-8F3A9C2B-0001",
+      "type": "temperature_humidity_npk",
+      "type_name": "温湿度传感器",
+      "data": {
+        "soil_temperature": null,
+        "soil_humidity": null,
+        "nitrogen": null,
+        "phosphorus": null,
+        "potassium": null,
+        "ph": null,
+        "salinity": null,
+        "air_temperature": 26.3,
+        "air_humidity": 65.1
+      }
+    },
+    {
+      "sensor_id": "S-NPK-0001",
+      "unique_code": "GW-8F3A9C2B-0002",
+      "type": "npk",
+      "type_name": "七合一土壤传感器",
+      "data": {
+        "soil_temperature": 24.9,
+        "soil_humidity": 68.2,
+        "nitrogen": 45.3,
+        "phosphorus": 22.1,
+        "potassium": 33.7,
+        "ph": 6.8,
+        "salinity": 1.23,
+        "air_temperature": null,
+        "air_humidity": null
+      }
+    }
+  ]
+}

@@ -1,0 +1,27 @@
+  关键设计：
+
+  - 两路传感器同一条 RS485 总线，靠从站地址区分（空气 1、土壤 2），一次读 7 个寄存器
+  - GPS 时间做 timestamp，无定位时回退到 ESP32 时钟（WiFi 模式下用 NTP 校准）
+  - 上传通道可切换："wifi" 用于本地联调，"ec800" 走 AT+QHTTPPOST（需服务器有公网地址）
+  - JSON 严格按文档：data 固定 9 项，没采到的填 null；唯一码为 GW-8F3A9C2B-0001/0002
+  - 空气传感器 type 沿用文档里的枚举 temperature_humidity_npk，土壤用 npk；如服务器要求不同，改 config.py
+
+  已实际验证
+
+  - 13 个源文件语法检查全部通过，无 BOM
+  - selftest.py：CRC 已知向量、解帧、负温度、GPS 经纬度与时间戳、JSON 结构 全部 PASSED
+  - test_server.py 端到端：样例 JSON POST 返回 200 并落盘；非法数据返回 400
+
+  未验证
+
+  本机没有连接开发板（无 COM 口），所以 RS485 实际收发、EC800 的 AT 交互、ST7789
+  实际显示都没在硬件上跑过。寄存器映射用的是通用默认值，需按传感器手册在 config.py 里校准。
+
+  下一步
+
+  1. Thonny 里选 MicroPython (ESP32) 解释器，插板子
+  2. 改 config.py 的 WiFi 和 UPLOAD_URL
+  3. 上传：config.py、main.py → 根目录；lib/*.py → /lib/
+  4. PC 上运行：
+  E:\Thonny\python.exe E:\MyCode\demo1\tools\test_server.py
+  5. Ctrl+D 重启，屏幕和 REPL 的 [GW] 日志会同步显示状态

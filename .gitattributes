@@ -1,0 +1,7 @@
+* text=auto
+
+# MicroPython 源码统一 LF，避免上传到设备后出现 CRLF
+*.py text eol=lf
+*.md text eol=lf
+*.json text eol=lf
+*.txt text
